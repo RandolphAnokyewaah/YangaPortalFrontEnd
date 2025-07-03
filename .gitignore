@@ -1,0 +1,17 @@
+# Packages
+node_modules/
+package-lock.json
+
+# Build
+dist/
+
+# Environment
+*.env
+.env
+.env.*
+env.json
+
+# Temp
+.angular
+.vscode
+.nx

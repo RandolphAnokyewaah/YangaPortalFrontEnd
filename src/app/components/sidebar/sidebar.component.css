@@ -1,0 +1,14 @@
+.sidebar {
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+  z-index: 100;
+}
+.sidebar .nav-link.active {
+  background: #495057;
+}
+.sidebar .nav-link {
+  transition: background 0.2s;
+}
+.sidebar .nav-link:hover {
+  background: #343a40;
+  cursor: pointer;
+}

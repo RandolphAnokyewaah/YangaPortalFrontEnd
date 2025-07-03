@@ -1,0 +1,11 @@
+.dashboard-layout {
+  background: #f8fafc;
+}
+.main-content {
+  min-width: 0;
+}
+.content-area {
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  background: #fff;
+}

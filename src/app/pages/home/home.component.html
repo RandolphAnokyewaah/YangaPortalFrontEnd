@@ -1,0 +1,26 @@
+<div class="home-container">
+  <!-- Logo Header -->
+  <div class="logo-container">
+    <img src="assets/images/Wallpaper_Desktop_Yanga_brandlogo-blue.jpg" alt="Yanga Logo" class="yanga-logo" />
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-cards-container">
+    <div class="stat-card" [ngClass]="getStatClass(stats.machines)">
+      <div class="stat-title">Machines</div>
+      <div class="stat-value">{{ stats.machines }}</div>
+    </div>
+    <div class="stat-card" [ngClass]="getStatClass(stats.members)">
+      <div class="stat-title">Members</div>
+      <div class="stat-value">{{ stats.members }}</div>
+    </div>
+    <div class="stat-card" [ngClass]="getStatClass(stats.promotions)">
+      <div class="stat-title">Promotions</div>
+      <div class="stat-value">{{ stats.promotions }}</div>
+    </div>
+    <div class="stat-card" [ngClass]="getStatClass(stats.users)">
+      <div class="stat-title">Users</div>
+      <div class="stat-value">{{ stats.users }}</div>
+    </div>
+  </div>
+</div>

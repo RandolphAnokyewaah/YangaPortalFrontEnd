@@ -1,0 +1,79 @@
+<div class="login-wrapper d-flex align-items-center justify-content-center min-vh-100 px-3">
+  <div class="login-background"></div>
+
+  <div class="login-card-container w-100" style="max-width: 420px;">
+    <div class="card shadow-lg border-0 rounded-4 animate-fade position-relative">
+      <div class="card-body p-4 bg-white rounded-4">
+
+        <!-- Logo -->
+        <div class="text-center mb-4">
+          <img src="assets/images/Wallpaper_Desktop_Yanga_brandlogo-blue.jpg" alt="Yanga Logo" class="img-fluid" style="max-height: 80px;" />
+        </div>
+
+        <!-- Title -->
+        <h4 class="text-center fw-bold mb-4">Welcome Back</h4>
+
+        <!-- Form -->
+        <form class="row g-4 needs-validation" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
+
+          <div class="col-12">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="username"
+                name="username"
+                class="form-control rounded-3"
+                placeholder="Enter email"
+                [(ngModel)]="username"
+                required
+              />
+              <label for="username">{{ 'ENTER_EMAIL' | translate }}</label>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="form-floating position-relative">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                id="password"
+                name="password"
+                class="form-control rounded-3 pe-5"
+                placeholder="Enter password"
+                [(ngModel)]="password"
+                required
+              />
+              <label for="password">{{ 'ENTER_PASSWORD' | translate }}</label>
+              <button
+                type="button"
+                class="btn position-absolute end-0 top-50 translate-middle-y p-0 me-3 border-0 bg-transparent"
+                title="Show/Hide Password"
+                (click)="togglePassword()"
+                tabindex="-1"
+                style="z-index: 2;"
+              >
+                <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'" style="font-size: 1.2rem;"></i>
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="errorMessage" class="col-12">
+            <div class="alert alert-danger text-center small mb-0 py-2 animate-fade-in">
+              {{ errorMessage }}
+            </div>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary w-100 py-2 rounded-3 fw-semibold shadow-sm">
+              {{ 'LOGIN' | translate }}
+            </button>
+          </div>
+        </form>
+
+        <div class="text-center mt-3 small text-muted">
+          &copy; {{ currentYear }} Yanga Sports Water
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,149 @@
+.mui-outline-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.mui-outline-input {
+  width: 100%;
+  padding: 1rem 0.75rem 0.25rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  background: none;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.mui-outline-input:focus {
+  border-color: #3f51b5;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
+}
+
+.mui-outline-label {
+  position: absolute;
+  top: 1rem;
+  left: 0.75rem;
+  color: #6c757d;
+  background: white;
+  padding: 0 0.25rem;
+  font-size: 1rem;
+  transition: 0.2s ease all;
+  pointer-events: none;
+}
+
+.mui-outline-input:focus + .mui-outline-label,
+.mui-outline-input:not(:placeholder-shown) + .mui-outline-label {
+  top: -0.6rem;
+  left: 1rem;
+  font-size: 0.70rem;
+  color: #495057;
+  background: white;
+}
+
+.mui-outline-input::placeholder {
+  color: transparent;
+}
+
+/* Autofill support */
+.mui-outline-input:-webkit-autofill + .mui-outline-label {
+  top: -0.6rem;
+  left: 0.5rem;
+  font-size: 0.85rem;
+  color: #495057;
+  background: white;
+}
+
+.password-eye-icon {
+  z-index: 99 !important;
+}
+
+/* Remove clear icon in Chrome, Safari, Edge, and Opera */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
+/* Remove clear icon in Firefox */
+input[type="search"] {
+    appearance: none;
+    -moz-appearance: textfield;
+}
+
+/* Remove clear icon in Edge */
+input[type="search"]::-ms-clear {
+    display: none;
+}
+
+html[dir="rtl"] .searchIcon {
+    left: 10px;
+}
+
+html[dir="ltr"] .searchIcon {
+    right: 0;
+}
+
+html[dir="rtl"] .accordion-button::after {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+html[dir="ltr"] .accordion-button::after {
+    margin-left: auto;
+}
+
+.sold_color {
+    background-color: #00B050;
+    border-color: #00B050;
+}
+
+.sold_color:hover {
+    background-color: #00B050;
+    border-color: #00B050;
+}
+
+.deleted_color {
+    background-color: #FF0000;
+    border-color: #FF0000;
+}
+
+.deleted_color:hover {
+    background-color: #FF0000;
+    border-color: #FF0000;
+}
+
+.marketplace_color {
+    background-color: #F6B735;
+    border-color: #F6B735;
+}
+
+.marketplace_color:hover {
+    background-color: #F6B735;
+    border-color: #F6B735;
+}
+
+.toast-container {
+    z-index: 1050;
+}
+
+.book_image img {
+    width: 180px;
+    max-width: 180px;
+    min-width: 180px;
+    height: 250px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .d-flex.flex-wrap {
+        flex-direction: column;
+        /* Stack elements on small screens */
+        text-align: center;
+    }
+
+    .sales_section .ms-auto {
+        margin-left: 0 !important;
+    }
+}

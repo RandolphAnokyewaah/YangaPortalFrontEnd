@@ -1,0 +1,91 @@
+<div class="members-page container py-4">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold">Members</h3>
+    <button class="btn btn-primary shadow-sm" (click)="openCreateModal()">
+      <i class="bi bi-plus-lg me-1"></i> Add Member
+    </button>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="d-flex justify-content-center py-5">
+    <div class="spinner-border text-primary" style="width: 2.5rem; height: 2.5rem;"></div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <!-- Member Table -->
+  <table class="table table-hover table-bordered align-middle" *ngIf="members.length">
+    <thead class="table-light">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th class="text-center" style="width: 120px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of members">
+        <td>{{ m.id }}</td>
+        <td>{{ m.name }}</td>
+        <td>{{ m.email }}</td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-outline-primary me-1" (click)="openEditModal(m)" title="Edit">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-danger" (click)="deleteMember(m)" title="Delete">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No Data -->
+  <div *ngIf="!loading && !members.length" class="text-center text-muted py-5 fs-5">
+    <i class="bi bi-people-fill d-block mb-2" style="font-size: 2rem;"></i>
+    No members found.
+  </div>
+
+  <!-- Create/Edit Modal -->
+  <div class="modal fade show" tabindex="-1"
+       [ngClass]="{ show: showModal }"
+       [ngStyle]="{ display: showModal ? 'block' : 'none', backgroundColor: showModal ? 'rgba(0, 0, 0, 0.4)' : 'transparent' }"
+       role="dialog" aria-modal="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow-lg border-0 rounded-4">
+        <div class="modal-header bg-primary text-white rounded-top-4">
+          <h5 class="modal-title fw-semibold">
+            {{ isEditMode ? 'Edit Member' : 'Add Member' }}
+          </h5>
+          <button type="button" class="btn-close btn-close-white" (click)="closeModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form #memberForm="ngForm">
+            <div class="mb-3">
+              <label for="name" class="form-label fw-semibold">Name</label>
+              <input type="text" id="name" class="form-control form-control-lg rounded-3"
+                     [(ngModel)]="modalMember.name" name="name" required
+                     placeholder="Enter member name" autofocus />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label fw-semibold">Email</label>
+              <input type="email" id="email" class="form-control form-control-lg rounded-3"
+                     [(ngModel)]="modalMember.email" name="email" required
+                     placeholder="Enter member email" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer bg-light rounded-bottom-4">
+          <button type="button" class="btn btn-outline-secondary px-4" (click)="closeModal()">Cancel</button>
+          <button type="button" class="btn btn-primary px-4"
+                  [disabled]="!modalMember.name || !modalMember.email"
+                  (click)="saveMember()">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

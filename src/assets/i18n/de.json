@@ -1,0 +1,15 @@
+{
+
+	"LAST_NAME": "Nachname",
+	"LOGIN": "Login",
+	"LOGIN_FAILED": "Fehler bei der Anmeldung",
+	"LOGIN_SUCCESSFUL": "Anmeldung erfolgreich",
+	"LOGOUT": "Abmelden",
+	"LOGOUT_SUCCESSFUL": "Abmeldung erfolgreich",
+	"MAIN_ACCOUNT": "Mein Konto",
+	"marketplace": "Marktplatz",
+	"MY_PROFILE": "Mein-Profil",
+	"NAME": "Name",
+	"USER_OFFER": "Unser Angebot",
+	"WELCOME_MESSAGE": "Herzlich willkommen Florentin in deinem persönlichen Konto."
+}
