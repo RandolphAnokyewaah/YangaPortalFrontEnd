@@ -27,6 +27,6 @@ export class MemberService {
   }
 
   deleteMember(id: number): Observable<void> {
-    return from(this.apiService.httpDeleteRequest(`${this.apiUrl}/${id}`, {})) as Observable<void>;
+    return from(this.apiService.httpDeleteRequest(`${this.apiUrl}/${id}`, null)) as Observable<void>;
   }
 }
