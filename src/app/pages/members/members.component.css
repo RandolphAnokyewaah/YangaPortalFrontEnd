@@ -16,3 +16,71 @@
 .modal.show .modal-dialog {
   transform: scale(1.02);
 }
+
+.members-wrapper {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
+  overflow-x: hidden;
+}
+
+.members-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 250px;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.wave {
+  width: 100vw; 
+  height: 100%;
+  display: block;
+  transform: translateY(-20%);
+  animation: waveFloat 10s ease-in-out infinite;
+}
+
+
+@keyframes waveFloat {
+  0%, 100% {
+    transform: translateY(-20%) translateX(0);
+  }
+  50% {
+    transform: translateY(-22%) translateX(-10px);
+  }
+}
+
+.members-page {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-in-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+}
+.members-background::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100px;
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+  z-index: 1;
+}

@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { MachineService, Machine } from '../../services/machine.service';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-machines',
@@ -13,16 +15,23 @@ export class MachinesComponent implements OnInit {
   machines: Machine[] = [];
   loading = false;
   error = '';
+  userRole: string = '';
+
 
   showModal = false;
   isEditMode = false;
   modalMachine: Partial<Machine> = { location: '', isActive: false };
   editingId: number | null = null;
 
-  constructor(private machineService: MachineService) {}
+  constructor(private machineService: MachineService,private authService: AuthService) {
+        this.userRole = this.authService.getLocalStorageData('userrole', 'string') ?? '';
+
+  }
 
   ngOnInit() {
     this.fetchMachines();
+    this.userRole = this.authService.getLocalStorageData('userrole', 'string') ?? '';
+
   }
 
   fetchMachines() {
@@ -39,6 +48,9 @@ export class MachinesComponent implements OnInit {
     this.showModal = true;
     this.editingId = null;
   }
+isReadOnly(): boolean {
+  return this.userRole === 'User';
+}
 
   openEditModal(machine: Machine) {
     this.isEditMode = true;

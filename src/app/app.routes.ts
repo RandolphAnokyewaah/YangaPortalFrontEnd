@@ -5,6 +5,7 @@ import { MachinesComponent } from './pages/machines/machines.component';
 import { DashboardLayoutComponent } from './components/dashboard-layout/dashboard-layout.component';
 import { MembersComponent } from './pages/members/members.component';
 import { PromotionsComponent } from './pages/promotions/promotions.component';
+import { UsersComponent } from './pages/users/users.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,9 @@ export const routes: Routes = [
       { path: 'members', component: MembersComponent },
       { path: 'promotions', component: PromotionsComponent },
       { path: 'machines', component: MachinesComponent },
+      {path: 'users',component: UsersComponent
+}
+
     ]
   },
   { path: 'login', component: LoginComponent },

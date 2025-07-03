@@ -1,89 +1,106 @@
-<div class="members-page container py-4">
-  <!-- Header -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 class="fw-bold">Members</h3>
-    <button class="btn btn-primary shadow-sm" (click)="openCreateModal()">
-      <i class="bi bi-plus-lg me-1"></i> Add Member
-    </button>
+<div class="members-wrapper position-relative">
+  <div class="members-background">
+    <svg class="wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="gradientWave" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#007bff"/>
+          <stop offset="100%" stop-color="#ff6600"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#gradientWave)" fill-opacity="1"
+            d="M0,64L48,90.7C96,117,192,171,288,170.7C384,171,480,117,576,96C672,75,768,85,864,101.3C960,117,1056,139,1152,160C1248,181,1344,203,1392,213.3L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+      </path>
+    </svg>
   </div>
 
-  <!-- Loading Spinner -->
-  <div *ngIf="loading" class="d-flex justify-content-center py-5">
-    <div class="spinner-border text-primary" style="width: 2.5rem; height: 2.5rem;"></div>
-  </div>
+  <div class="members-page container py-5 position-relative">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold text-primary mb-0">👥 Members</h2>
+      <button class="btn btn-success shadow-sm px-4 d-flex align-items-center gap-2" (click)="openCreateModal()">
+        <i class="bi bi-plus-circle-fill"></i> <span>Add Member</span>
+      </button>
+    </div>
 
-  <!-- Error Message -->
-  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+    <!-- Loading -->
+    <div *ngIf="loading" class="d-flex justify-content-center py-5">
+      <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;"></div>
+    </div>
 
-  <!-- Member Table -->
-  <table class="table table-hover table-bordered align-middle" *ngIf="members.length">
-    <thead class="table-light">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th class="text-center" style="width: 120px;">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let m of members">
-        <td>{{ m.id }}</td>
-        <td>{{ m.name }}</td>
-        <td>{{ m.email }}</td>
-        <td class="text-center">
-          <button class="btn btn-sm btn-outline-primary me-1" (click)="openEditModal(m)" title="Edit">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button class="btn btn-sm btn-outline-danger" (click)="deleteMember(m)" title="Delete">
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <!-- Error -->
+    <div *ngIf="error" class="alert alert-danger text-center fw-semibold">{{ error }}</div>
 
-  <!-- No Data -->
-  <div *ngIf="!loading && !members.length" class="text-center text-muted py-5 fs-5">
-    <i class="bi bi-people-fill d-block mb-2" style="font-size: 2rem;"></i>
-    No members found.
-  </div>
+    <!-- Members table -->
+    <div class="table-responsive shadow-sm rounded-3" *ngIf="members.length">
+      <table class="table table-hover table-bordered align-middle mb-0">
+        <thead class="table-light text-uppercase small">
+          <tr>
+            <th style="width: 60px;">#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th class="text-center" style="width: 120px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let m of members">
+            <td>{{ m.id }}</td>
+            <td class="fw-medium">{{ m.name }}</td>
+            <td>{{ m.email }}</td>
+            <td class="text-center">
+              <button class="btn btn-sm btn-outline-primary me-1" (click)="openEditModal(m)" title="Edit">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-danger" (click)="deleteMember(m)" title="Delete">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <!-- Create/Edit Modal -->
-  <div class="modal fade show" tabindex="-1"
-       [ngClass]="{ show: showModal }"
-       [ngStyle]="{ display: showModal ? 'block' : 'none', backgroundColor: showModal ? 'rgba(0, 0, 0, 0.4)' : 'transparent' }"
-       role="dialog" aria-modal="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content shadow-lg border-0 rounded-4">
-        <div class="modal-header bg-primary text-white rounded-top-4">
-          <h5 class="modal-title fw-semibold">
-            {{ isEditMode ? 'Edit Member' : 'Add Member' }}
-          </h5>
-          <button type="button" class="btn-close btn-close-white" (click)="closeModal()" aria-label="Close"></button>
-        </div>
-        <div class="modal-body p-4">
-          <form #memberForm="ngForm">
-            <div class="mb-3">
-              <label for="name" class="form-label fw-semibold">Name</label>
-              <input type="text" id="name" class="form-control form-control-lg rounded-3"
-                     [(ngModel)]="modalMember.name" name="name" required
-                     placeholder="Enter member name" autofocus />
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label fw-semibold">Email</label>
-              <input type="email" id="email" class="form-control form-control-lg rounded-3"
-                     [(ngModel)]="modalMember.email" name="email" required
-                     placeholder="Enter member email" />
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer bg-light rounded-bottom-4">
-          <button type="button" class="btn btn-outline-secondary px-4" (click)="closeModal()">Cancel</button>
-          <button type="button" class="btn btn-primary px-4"
-                  [disabled]="!modalMember.name || !modalMember.email"
-                  (click)="saveMember()">
-            Save
-          </button>
+    <!-- No members -->
+    <div *ngIf="!loading && !members.length" class="text-center text-muted py-5">
+      <i class="bi bi-emoji-frown display-4 d-block mb-3"></i>
+      <p class="fs-5 mb-0">No members found.</p>
+      <small>Click "Add Member" to create one.</small>
+    </div>
+
+    <!-- Create/Edit Modal -->
+    <div class="modal fade show" tabindex="-1"
+         [ngClass]="{ show: showModal }"
+         [ngStyle]="{ display: showModal ? 'block' : 'none', backgroundColor: showModal ? 'rgba(0, 0, 0, 0.4)' : 'transparent' }"
+         role="dialog" aria-modal="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4 animate-fade-in">
+          <div class="modal-header bg-gradient-primary text-white rounded-top-4">
+            <h5 class="modal-title fw-semibold">
+              {{ isEditMode ? 'Edit Member' : 'Add New Member' }}
+            </h5>
+            <button type="button" class="btn-close btn-close-white" (click)="closeModal()" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-4">
+            <form #memberForm="ngForm" class="row g-3">
+              <div class="col-12">
+                <label for="name" class="form-label fw-semibold">Name</label>
+                <input type="text" id="name" class="form-control form-control-lg rounded-3"
+                       [(ngModel)]="modalMember.name" name="name" required placeholder="Enter full name" />
+              </div>
+              <div class="col-12">
+                <label for="email" class="form-label fw-semibold">Email</label>
+                <input type="email" id="email" class="form-control form-control-lg rounded-3"
+                       [(ngModel)]="modalMember.email" name="email" required placeholder="Enter email address" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer bg-light rounded-bottom-4">
+            <button type="button" class="btn btn-outline-secondary px-4" (click)="closeModal()">Cancel</button>
+            <button type="button" class="btn btn-primary px-4"
+                    [disabled]="!modalMember.name || !modalMember.email"
+                    (click)="saveMember()">
+              <i class="bi bi-save me-1"></i> Save
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,118 @@
+<div class="users-wrapper position-relative">
+    <!-- Decorative Wave Background -->
+    <div class="promotions-background">
+        <svg class="wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="usersWave" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#0d6efd" />
+                    <stop offset="100%" stop-color="#00c6ff" />
+                </linearGradient>
+            </defs>
+            <path fill="url(#usersWave)" fill-opacity="1"
+                d="M0,64L48,90.7C96,117,192,171,288,170.7C384,171,480,117,576,96C672,75,768,85,864,101.3C960,117,1056,139,1152,160C1248,181,1344,203,1392,213.3L1440,224L1440,0L0,0Z">
+            </path>
+        </svg>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container py-5 position-relative">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-primary mb-0">👤 Users</h2>
+            <button class="btn btn-success shadow-sm px-4 d-flex align-items-center gap-2" (click)="openCreateModal()">
+                <i class="bi bi-plus-circle-fill"></i> <span>Add User</span>
+            </button>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div *ngIf="loading" class="text-center py-5">
+            <div class="spinner-border text-primary" style="width: 2.5rem; height: 2.5rem;"></div>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="error" class="alert alert-danger text-center">{{ error }}</div>
+
+        <!-- Users Table -->
+        <div class="table-responsive shadow-sm rounded-3" *ngIf="users.length">
+            <table class="table table-hover table-bordered align-middle mb-0">
+                <thead class="table-light text-uppercase small">
+                    <tr>
+                        <th style="width: 60px;">ID</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th class="text-center" style="width: 120px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{ user.id }}</td>
+                        <td class="fw-medium">{{ user.username }}</td>
+                        <td><span class="badge bg-info-subtle text-info">{{ user.role }}</span></td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-outline-primary me-1" (click)="openEditModal(user)"
+                                title="Edit">
+                                <i class="bi bi-pencil-fill"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" (click)="deleteUser(user)" title="Delete">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- No Users Message -->
+        <div *ngIf="!loading && !users.length" class="text-center text-muted py-5">
+            <i class="bi bi-person-x display-4 d-block mb-3 text-info animated-pulse"></i>
+            <p class="fs-5 mb-0">No users found.</p>
+        </div>
+    </div>
+
+    <!-- Add/Edit User Modal -->
+    <div class="modal fade show" tabindex="-1" [ngClass]="{ show: showUserModal }"
+        [ngStyle]="{ display: showUserModal ? 'block' : 'none', backgroundColor: 'rgba(0, 0, 0, 0.5)' }" role="dialog"
+        aria-modal="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4 shadow-lg">
+                <div class="modal-header bg-primary text-white rounded-top-4">
+                    <h5 class="modal-title">{{ isEditMode ? 'Edit User' : 'Add User' }}</h5>
+                    <button type="button" class="btn-close btn-close-white" (click)="closeUserModal()"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form #userForm="ngForm" class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label">Username</label>
+                            <input type="text" [(ngModel)]="modalUser.username" name="username"
+                                class="form-control form-control-lg rounded-3" required />
+                        </div>
+                        <div class="col-12" *ngIf="!isEditMode">
+                            <label class="form-label">Password</label>
+                            <input type="password" [(ngModel)]="modalUser.password" name="password"
+                                class="form-control form-control-lg rounded-3" required />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Role</label>
+                            <select class="form-select" [(ngModel)]="modalUser.role" name="role" required>
+                                <option value="Admin">Admin</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Support">Support</option>
+                                <option value="User">User</option>
+                            </select>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer bg-light rounded-bottom-4">
+                    <button type="button" class="btn btn-outline-secondary px-4"
+                        (click)="closeUserModal()">Cancel</button>
+                    <button type="button" class="btn btn-primary px-4" (click)="saveUser()"
+                        [disabled]="!modalUser.username || (!isEditMode && !modalUser.password)">
+                        <i class="bi bi-save me-1"></i> Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

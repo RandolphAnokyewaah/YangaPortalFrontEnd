@@ -1,7 +1,11 @@
 <nav class="sidebar d-flex flex-column p-3 bg-dark text-white" style="width: 240px; min-height: 100vh;">
-  <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-    <span class="fs-4 fw-bold">Yanga Portal</span>
-  </a>
+<a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+  <span class="fs-4 fw-bold">Yanga Portal</span>
+</a>
+<div class="mt-2 text-white-50 small ms-1">
+  Hello, <strong>{{ username }}</strong> {{ userRole }}
+</div>
+
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
@@ -9,7 +13,7 @@
         <i class="bi bi-house me-2"></i> Dashboard
       </a>
     </li>
-    <li *ngIf="userRole == '0'">
+    <li>
       <a class="nav-link text-white" routerLink="/members">
         <i class="bi bi-people me-2"></i> Members
       </a>
@@ -22,6 +26,11 @@
     <li>
       <a class="nav-link text-white" routerLink="/machines">
         <i class="bi bi-cpu me-2"></i> Machines
+      </a>
+    </li>
+    <li *ngIf="userRole === 'Admin'">
+      <a class="nav-link text-white" routerLink="/users">
+        <i class="bi bi-cpu me-2"></i> Users
       </a>
     </li>
   </ul>
