@@ -14,8 +14,11 @@ export interface Promotion {
 export class PromotionService {
   private apiUrl = '/promotions'; // Adjust as needed
 
-  constructor(private apiService: APIService) {}
-
+  constructor(private apiService: APIService) { }
+  
+getAll(): Observable<any[]> {
+    return from(this.apiService.httpGetRequest(this.apiUrl)) as Observable<any[]>;
+  }
   getPromotions(): Observable<Promotion[]> {
     return from(this.apiService.httpGetRequest(this.apiUrl)) as Observable<Promotion[]>;
   }
