@@ -1,4 +1,3 @@
-// my email id: a.basit.k08@gmail.com | whats app: +923351758820
 
 // config
 const config: any = {
