@@ -1,6 +1,7 @@
 // config
 const config: any = {
-  APIBaseUrl: "https://yanga-api.up.railway.app/api",
+  APIBaseUrl: "http://localhost:5000/api",
+
 };
 
 const apiEndpoint: any = {
